@@ -11,29 +11,6 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-	<script type="text/javascript">
-	function ambil() {
-
-
-						var url = "https://mcc-odd1819.herokuapp.com/courses"​​​​​​​​​​​​;
-						var request = $.ajax({
-								method:"GET";
-								url: url;
-						});
-
-						request.done(function(response) {
-							for (var i = 0; i < response.length; i++) {
-								$('#ambilSialan').append(`<li>${response[i].course_name}</li>`);
-							}
-
-						})
-						}
-			$('#btnLogout').click(function functionName() {
-					window.location.replace("index.html");
-					sessionStorage.clear();
-			});
-		});
-	</script>
 </head>
 
 <body>
@@ -51,31 +28,15 @@
 
 			</ul>
 			<input type="submit" name="" value="" onclick="">
-	<ul data-role="listview" data-split-theme="a" data-inset="true" id="display-resources">
-		<li>
+	<ul data-role="listview" data-split-theme="a" data-inset="true" id="ambilMyCourse">
+		<!-- <li>
 			<a href="#">
 				<iframe width="100" height="100" src="https://www.youtube.com/embed/tgbNymZ7vqY" style="float:left"></iframe>
 				<h2>Broken Bells</h2>
 				<p>Broken Bells</p>
 			</a>
 			<a href="#purchase">Purchase album</a>
-		</li>
-	<li>
-		<a href="#">
-			<iframe width="100" height="100" src="https://www.youtube.com/embed/tgbNymZ7vqY" style="float:left"></iframe>
-			<h2>Warning</h2>
-			<p>Hot Chip</p>
-		</a>
-		<a href="#purchase" data-position-to="window" data-transition="pop">Purchase album</a>
-	</li>
-	<li>
-		<a href="#">
-			<iframe width="100" height="100" src="https://www.youtube.com/embed/tgbNymZ7vqY" style="float:left"></iframe>
-			<h2>Wolfgang Amadeus Phoenix</h2>
-			<p>Phoenix</p>
-		</a>
-		<a href="#purchase" data-position-to="window" data-transition="pop">Purchase album</a>
-	</li>
+		</li> -->
 </ul>
 
 <!-- <div data-role="popup" id="purchase" data-theme="a" data-overlay-theme="b" class="ui-content" style="max-width:340px; padding-bottom:2em;">
