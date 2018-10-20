@@ -18,7 +18,7 @@ function get_data_course(){
 					for (let index = 0; index < response.length; index++) {
 							$('#ambilCourseHome').append(
 							`<li data-role="list-divider">${response[index].main_course_name}</li>
-							<li><a href="course_detail.html?course_id=${response[index].id}">${response[index].course_name}</a></li>`);
+							<li><a href="course_detail.html?course_id=${response[index].id}">${response[index].course_name}<br>${response[index].description}</a></li>`);
 					}
           // $('#ambilCourse').trigger('create');
 					$("#ambilCourseHome").listview('refresh');
@@ -136,11 +136,11 @@ function capek() {
     var request = $.ajax(opt);
     request.done(function(res)
     {
-      if(res.link != data[i])
+      if(res.id != data[i])
       {
         $('#ambilMyCourse').append(
           `<li>
-            <a href="course_detail.html?course_id=${data[i]}">
+            <a href="course_detail.html?course_id=${res.id}">
               <iframe width="100" height="100" src="${res.link}" style="float:left"></iframe>
               <h2>${res.course_name}</h2>
               <p>${res.description}</p>
