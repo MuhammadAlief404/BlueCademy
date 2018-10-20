@@ -45,50 +45,30 @@ function getDetail(userId){
     $('#txtCName').text(res.course_name);
     $('#txtDesc').text(res.description);
     $('#frameCourse').attr("src",res.link);
-    // $('#txtDesc').text(res.email);
+
   });
 }
 
+var data = localStorage.getItem('course');
+
 function saveCourse(courseId){
-  // var data = localStorage.getItem('course');
-  //
-  // var arr;
-  //
-  // if(!data)
-  // {
-  //     arr = [];
-  // }
-  // else
-  // {
-  //     //karena localStorage tidak bisa simpan array, jadi DATA harus di convert dulu jadi JSON
-  //     arr = JSON.parse(data);
-  // }
-  // arr.push(courseId);
-  //
-  // data = JSON.stringify(arr);
-  // localStorage.setItem('course',data);
 
-  var db = openDatabase('mydb', '1.0', 'db_course', 2 * 1024 * 1024);
+  var arr;
 
-  var link = "https://mcc-odd1819.herokuapp.com/detail_courses?course_id=" + userId;
-
-  var opt =
+  if(!data)
   {
-      type:'POST',
-      url : link,
-      data: {
-          course_id : userId
-        }
-  };
-
-  var request = $.ajax(opt);
-  request.done(function(res)
+      arr = [];
+  }
+  else
   {
-    db.transaction(function (tx) {
-       tx.executeSql('CREATE TABLE IF NOT EXISTS course (id unique, main_course,course_name,link,desc)');
-       tx.executeSql('INSERT INTO course (id, main_course,course_name,link,desc) VALUES ('+res.id+','+res.main_course_name+','+res.course_name+','+res.link+','+res.description+')');
-    });
-  });
+      //karena localStorage tidak bisa simpan array, jadi DATA harus di convert dulu jadi JSON
+      arr = JSON.parse(data);
+  }
+  arr.push(courseId);
+
+  data = JSON.stringify(arr);
+  localStorage.setItem('course',data);
+  // });
 }
 
 function getMyCourse() {
@@ -139,6 +119,41 @@ function test() {
   console.log(data);
 
 }
+
+function capek() {
+
+  for (var i = 0; i < data.length; i++)
+  {
+    var link = "https://mcc-odd1819.herokuapp.com/detail_courses?course_id=" + data[i];
+    var opt =
+    {
+        type:'POST',
+        url : link,
+        data: {
+            course_id : data[i]
+          }
+    };
+    var request = $.ajax(opt);
+    request.done(function(res)
+    {
+      if(res.link != data[i])
+      {
+        $('#ambilMyCourse').append(
+          `<li>
+            <a href="course_detail.html?course_id=${data[i]}">
+              <iframe width="100" height="100" src="${res.link}" style="float:left"></iframe>
+              <h2>${res.course_name}</h2>
+              <p>${res.description}</p>
+            </a>
+          </li>`);
+              $("#ambilMyCourse").listview('refresh');
+      }
+
+    });
+  }
+
+}
+
 $(function() {
   //onLoad
   //login
@@ -166,6 +181,17 @@ $(function() {
   $('#testCourse').click(function() {
     test(course_id);
   });
+
+  //tambah MyCourse
+  capek();
+
+  //validasi MyCourse
+  for (var i = 0; i < data.length; i++) {
+    if(data[i] == course_id)
+    {
+      $('#btnAddCourse').remove();
+    }
+  }
 
   //MyCourse
   $('#testMyCourse').click(function() {
