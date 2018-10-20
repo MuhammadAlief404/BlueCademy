@@ -11,38 +11,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<script src="config.js"> </script>
-	<script type="text/javascript">
 
-	function get_data()
-	{
-		var url="https://mcc-odd1819.herokuapp.com/courses";
-		var request = $.ajax({
-				method : "GET",
-				url : url
-		});
-		request.done(function(response){
-				if(response)
-				{
-						for (let index = 0; index < response.length; index++) {
-								$('#ambilCourse').append(
-								`<li data-role="list-divider">${response[index].main_course_name}</li>
-								<li><a href="#">${response[index].course_name}</a></li>`);
-						}
-						$("#ambilCourse").listview('refresh');
-				}
-		})
-	}
-
-	//onload function
-	$(function(){
-			get_data();
-	})
-	function submit() {
-		window.location.replace("my_course.html");
-	}
-
-
-	</script>
 </head>
 <body>
 	<div data-role="page" data-theme="a">

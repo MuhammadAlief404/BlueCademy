@@ -13,14 +13,14 @@
 	<!-- <script type="text/javascript">
 		$(document).ready(function()
 		{
-			$('#btnLogin').click(function()
+			$('#btnLogin').submit(function()
 			{
 				var mail = document.getElementById("txtEmail").value;
 				sessionStorage.setItem("mail",mail);
 				window.location.href = "Home.html";
 			})
-		});
-	</script> -->
+		}); -->
+	</script>
 </head>
 <body>
 	<div data-role="page" data-theme="a">
@@ -28,7 +28,7 @@
 			<h1>Login Page</h1>
 		</div>
 		<div data-role="content" data-theme="a">
-			<form class="" action="javascript:simpanEmail()" method="post" data-ajax="false">
+			<form id="frmLogin" class="" action="javascript:doLogin()" method="post" data-ajax="false">
 				<label for="txtEmail">Email</label>
 				<input name="email" id="txtEmail" type="Email" placeholder="yourmail@mail.com" required>
 				<a href="" class="sign_up">Sign Up</a>

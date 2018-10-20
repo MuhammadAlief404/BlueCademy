@@ -14,9 +14,7 @@ function getData(courseId)
 }
 $(function () {
   var params = window.location.search;
-
   var search = new URLSearchParams(params);
-
   var course_id = search.get('course_id');
 
   getData(course_id);
