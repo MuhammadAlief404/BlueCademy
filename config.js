@@ -50,38 +50,83 @@ function getDetail(userId){
 }
 
 function saveCourse(courseId){
-  var data = localStorage.getItem('course');
+  // var data = localStorage.getItem('course');
+  //
+  // var arr;
+  //
+  // if(!data)
+  // {
+  //     arr = [];
+  // }
+  // else
+  // {
+  //     //karena localStorage tidak bisa simpan array, jadi DATA harus di convert dulu jadi JSON
+  //     arr = JSON.parse(data);
+  // }
+  // arr.push(courseId);
+  //
+  // data = JSON.stringify(arr);
+  // localStorage.setItem('course',data);
 
-  var arr;
+  var db = openDatabase('mydb', '1.0', 'db_course', 2 * 1024 * 1024);
 
-  if(!data)
+  var link = "https://mcc-odd1819.herokuapp.com/detail_courses?course_id=" + userId;
+
+  var opt =
   {
-      arr = [];
-  }
-  else
-  {
-      //karena localStorage tidak bisa simpan array, jadi DATA harus di convert dulu jadi JSON
-      arr = JSON.parse(data);
-  }
-  arr.push(courseId);
+      type:'POST',
+      url : link,
+      data: {
+          course_id : userId
+        }
+  };
 
-  data = JSON.stringify(arr);
-  localStorage.setItem('course',data);
+  var request = $.ajax(opt);
+  request.done(function(res)
+  {
+    db.transaction(function (tx) {
+       tx.executeSql('CREATE TABLE IF NOT EXISTS course (id unique, main_course,course_name,link,desc)');
+       tx.executeSql('INSERT INTO course (id, main_course,course_name,link,desc) VALUES ('+res.id+','+res.main_course_name+','+res.course_name+','+res.link+','+res.description+')');
+    });
+  });
 }
 
 function getMyCourse() {
+  //get dari JSON
+  var link = "https://mcc-odd1819.herokuapp.com/detail_courses?course_id=" + userId;
 
+  var opt =
+  {
+      type:'POST',
+      url : link,
+      data: {
+          course_id : userId
+        }
+  };
+
+  var request = $.ajax(opt);
+  request.done(function(res)
+  {
+    for (var i = 0; i < res.length; i++) {
+
+    }
+  });
+
+  //get dari localStorage
   var retrievedData = localStorage.getItem("course");
   var data = JSON.parse(retrievedData);
 
   for (let index = 0; index < data.length; index++) {
-      // $('#ambilMyCourse').append(
-      // `<li>
-  		// 	<a href="#">${data[index]}</a>
-  		// </li>`);
-      console.log("a");
+      $('#ambilMyCourse').append(
+      `<li>
+  			<a href="#">
+  				<iframe width="100" height="100" src="https://www.youtube.com/embed/tgbNymZ7vqY" style="float:left"></iframe>
+  				<h2>Broken Bells</h2>
+  				<p>Broken Bells</p>
+  			</a>`);
+  //     console.log("a");
   }
-  console.log("a");
+  // console.log("asdwasd");
   // $('#ambilCourse').trigger('create');
   // $("#ambilCourseHome").listview('refresh');
 }
@@ -123,7 +168,9 @@ $(function() {
   });
 
   //MyCourse
-  getMyCourse();
+  $('#testMyCourse').click(function() {
+    getMyCourse();
+  });
 })
 
   $('#btnCourse').click(function()
