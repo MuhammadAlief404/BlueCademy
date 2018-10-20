@@ -1,0 +1,39 @@
+<html>
+<head>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Detail Course</title>
+	<link rel="stylesheet" href="themes/mcc.min.css" />
+	<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+	<link rel="stylesheet" href="style.css">
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<script src="config.js"></script>
+
+</head>
+<body>
+	<div data-role="page" data-theme="a">
+		<div data-role="header" data-position="inline">
+			<h1>Detail Course</h1>
+		</div>
+		<div data-role="content" data-theme="a">
+			<a href="#" id="btnLogout" class="ui-shadow ui-btn ui-corner-all" style="background:#F3573B;">Logout</a>
+			<input id="btnCourse" value="Home" data-icon="Home" type="button" onclick="window.location='Home.html'">
+      <input id="btnCourse" value="My Course" data-icon="grid" type="button" onclick="window.location='my_course.html'">
+
+      <center><h2 id="txtMainCourse">Detail Course</h2></center>
+      <center><iframe src="https://www.youtube.com/embed/ETPxMBZCmng" seamless="" width="200" height="200"></iframe></center>
+			<br>
+			<font id="txtCName">Course Name</font>
+      <br>
+      <font id="txtDesc">Description</font>
+      <br>
+      <br>
+      <br>
+      <input id="btnCourse" value="Add Course" data-icon="plus" type="button" onclick="window.location='my_course.html'">
+		</div>
+	</div>
+</body>
+</html>
