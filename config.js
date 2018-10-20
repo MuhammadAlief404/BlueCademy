@@ -51,7 +51,6 @@ function getDetail(userId)
 
 $(function() {
   //onLoad
-
   //login
   $('#frmLogin').submit(doLogin);
 
@@ -66,7 +65,6 @@ $(function() {
   var params = window.location.search;
   var search = new URLSearchParams(params);
   var course_id = search.get('course_id');
-
   getDetail(course_id);
 })
 
